@@ -1,6 +1,9 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include "qglobal.h"
+#include <memory>
+
 #define FRAMES_PER_SECOND 20
 #define FRAMES_DELTA_TIME 0.05
 
@@ -14,7 +17,11 @@
 #define SPHERE_DRAG_CONSTANT 0.000088962049968029
 
 
-#define MUTATION_WEIGHT_CHANCE 0.1
-#define MUTATION_WEIGHT_STRENGTH 0.1
+#define MUTATION_WEIGHT_CHANCE 0.3
+#define MUTATION_WEIGHT_STRENGTH 0.05
+
+typedef const std::shared_ptr<const qreal>& cqreal_rptr;
+typedef std::shared_ptr<const qreal> cqreal_ptr;
+typedef std::shared_ptr<qreal> qreal_ptr;
 
 #endif // CONSTANTS_H

@@ -12,12 +12,13 @@ public:
 
     void compute() override {};
 
-    void linkRotation(const qreal* rotation) override {};
+    void linkRotation(cqreal_rptr rotation) override {};
+    void linkVelocity(cqreal_rptr velocity_x, cqreal_rptr velocity_y) override {}
 
-    const qreal* getTorqueLink() const override { return &torque; };
-    const qreal* getThrustLink() const override { return &thrust; };
+    cqreal_ptr getTorqueLink() const override { return torque; };
+    cqreal_ptr getThrustLink() const override { return thrust; };
 private:
-    qreal torque, thrust;
+    const cqreal_ptr torque, thrust;
 };
 
 #endif // STATICBOLAI_H

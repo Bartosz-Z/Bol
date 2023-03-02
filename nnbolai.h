@@ -4,7 +4,7 @@
 #include "bolai.h"
 #include "utility.h"
 
-#define INPUTS 1
+#define INPUTS 3
 #define HIDDEN 2
 #define OUTPUTS 2
 
@@ -19,15 +19,17 @@ public:
     void mutate();
 
     void setActivationFunction(qreal (*activation_function)(qreal)) { this->activation_function = activation_function; }
-    void linkRotation(const qreal* rotation) override { inputs[0] = rotation; }
+    void linkRotation(cqreal_rptr rotation) override { inputs[0] = rotation; }
+    void linkVelocity(cqreal_rptr velocity_x, cqreal_rptr velocity_y) override
+    { inputs[1] = velocity_x; inputs[2] = velocity_y; }
 
-    const qreal* getTorqueLink() const override { return outputs; }
-    const qreal* getThrustLink() const override { return outputs + 1; }
+    cqreal_ptr getTorqueLink() const override { return outputs[0]; }
+    cqreal_ptr getThrustLink() const override { return outputs[1]; }
 private:
     qreal max_torque, max_thrust;
 
-    const qreal *inputs[INPUTS];
-    qreal outputs[OUTPUTS];
+    cqreal_ptr inputs[INPUTS];
+    qreal_ptr outputs[OUTPUTS];
 
     qreal weights_ih[INPUTS][HIDDEN], weights_ho[HIDDEN][OUTPUTS];
 

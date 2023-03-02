@@ -1,6 +1,5 @@
 #include "staticbolai.h"
-#include "qdebug.h"
 
 StaticBolAI::StaticBolAI(qreal thrust, qreal torque)
-    : torque(torque), thrust(thrust) {}
+    : torque(std::make_shared<const qreal>(torque)), thrust(std::make_shared<const qreal>(thrust)) {}
 StaticBolAI::~StaticBolAI() {}

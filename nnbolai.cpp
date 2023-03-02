@@ -11,6 +11,8 @@ NNBolAI::NNBolAI(qreal max_thrust, qreal max_torque, qreal (*activation_function
     for (quint32 i = 0; i < HIDDEN; i++)
         for (quint32 j = 0; j < OUTPUTS; j++)
             weights_ho[i][j] = 2 * QRandomGenerator::global()->generateDouble() - 1;
+    for (quint32 i = 0; i < OUTPUTS; i++)
+        outputs[i] = std::make_shared<qreal>();
 }
 
 NNBolAI::~NNBolAI() {}
@@ -27,14 +29,14 @@ void NNBolAI::compute()
     }
     for (quint32 i = 0; i < OUTPUTS; i++)
     {
-        outputs[i] = 0;
+        *(outputs[i]) = 0;
         for (quint32 j = 0; j < HIDDEN; j++)
-            outputs[i] += hidden_values[j] * weights_ho[j][i];
-        outputs[i] = activation_function(outputs[i]);
+            *(outputs[i]) += hidden_values[j] * weights_ho[j][i];
+        *(outputs[i]) = activation_function(*(outputs[i]));
     }
 
-    outputs[0] = (outputs[0] - 0.5) * max_torque;
-    outputs[1] *= max_thrust;
+    *(outputs[0]) = (*(outputs[0]) - 0.5) * max_torque;
+    *(outputs[1]) *= max_thrust;
 }
 
 void NNBolAI::mutate()

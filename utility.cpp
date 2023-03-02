@@ -13,9 +13,19 @@ qreal sqrMagnitude(const QPointF& a)
     return a.x() * a.x() + a.y() * a.y();
 }
 
+qreal sqrMagnitude(qreal x, qreal y)
+{
+    return x * x + y * y;
+}
+
 qreal magnitude(const QPointF& a)
 {
     return qSqrt(a.x() * a.x() + a.y() * a.y());
+}
+
+qreal magnitude(qreal x, qreal y)
+{
+    return qSqrt(x * x + y * y);
 }
 
 qreal distance_to_segment(const QPointF& pl1, const QPointF& pl2, const QPointF& p)
