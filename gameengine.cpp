@@ -1,21 +1,18 @@
 #include "gameengine.h"
 
 GameEngine::GameEngine(qreal step_size)
-    : step_size(step_size)
-{
-
-}
+    : step_size(step_size) {}
 
 void GameEngine::step()
 {
-    foreach (auto* bol, bols)
+    for (const auto& bol : bols)
     {
         if (!bol->isFrozen())
         {
             QPointF bol_pos = bol->getPosition();
             bol->step(step_size);
-            foreach(const auto& bound, bounds)
-                if (bol->isCollisionWith(bound))
+            for (const auto& bound : bounds)
+                if (bol->collideWith(bound))
                 {
                     bol->setPosition(bol_pos);
                     bol->freeze();
@@ -27,7 +24,7 @@ void GameEngine::step()
 
 void GameEngine::draw(QPainter *painter)
 {
-    foreach (auto* bol, bols)
+    for (const auto& bol : bols)
         bol->draw(painter);
 }
 

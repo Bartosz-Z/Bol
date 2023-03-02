@@ -15,6 +15,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     nnbolai.cpp \
+    nnlearner.cpp \
     staticbolai.cpp \
     utility.cpp
 
@@ -25,6 +26,7 @@ HEADERS += \
     gameengine.h \
     mainwindow.h \
     nnbolai.h \
+    nnlearner.h \
     staticbolai.h \
     utility.h
 

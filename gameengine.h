@@ -12,11 +12,11 @@ public:
     void step();
     void draw(QPainter *painter);
 
-    void addBol(Bol *bol) { bols.emplaceBack(bol); }
+    void addBol(const std::shared_ptr<Bol>& bol) { bols.emplaceBack(bol); }
     void setBounds(const QRectF& rect);
 private:
     qreal step_size;
-    QVector<Bol*> bols;
+    QVector<std::shared_ptr<Bol>> bols;
     QVector<QLineF> bounds;
 };
 
