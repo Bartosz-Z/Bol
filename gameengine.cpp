@@ -22,7 +22,7 @@ void GameEngine::step()
     }
 }
 
-void GameEngine::draw(QPainter *painter)
+void GameEngine::draw(QPainter *painter) const
 {
     for (const auto& bol : bols)
         bol->draw(painter);

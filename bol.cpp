@@ -1,6 +1,4 @@
 #include "bol.h"
-#include "constants.h"
-#include "qdebug.h"
 #include "utility.h"
 #include <QtMath>
 

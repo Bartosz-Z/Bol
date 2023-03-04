@@ -33,6 +33,9 @@ public:
     cqreal_ptr getVelocityXLink() const { return velocity_x; }
     cqreal_ptr getVelocityYLink() const { return velocity_y; }
 
+    qreal getTorque() const { return *torque; }
+    qreal getThrust() const { return *thrust; }
+
     void freeze() { frozen = true; }
     void unfreeze() { frozen = false; }
     bool isFrozen() const { return frozen; }

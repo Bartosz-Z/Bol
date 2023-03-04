@@ -1,30 +1,27 @@
 #include "nnlearner.h"
-#include "constants.h"
 #include "qdebug.h"
-#include "utility.h"
 #include <QRandomGenerator>
 
 NNLearner::NNLearner(
         qreal step_size,
-        quint32 generation_duration,
-        quint32 generations_count,
         quint32 population,
         qreal bol_size,
         qreal max_thrust,
-        qreal max_torque)
-    : step_size(step_size), generation_duration(generation_duration), generations_count(generations_count)
+        qreal max_torque,
+        qreal (*activation_function)(qreal))
+    : step_size(step_size)
 {
     bols.reserve(population);
     for (quint32 i = 0; i < population; i++)
     {
         bols.emplace_back(bol_size);
-        nns.emplaceBack(std::make_shared<NNBolAI>(max_thrust, max_torque));
+        nns.emplaceBack(std::make_shared<NNBolAI>(max_thrust, max_torque, activation_function));
         bols.back().linkAI(nns.last());
     }
     fittings.resize(population);
 }
 
-void NNLearner::train()
+void NNLearner::train(quint32 generations_count, quint32 generation_duration)
 {
     for (quint32 gen_i = 0; gen_i < generations_count; gen_i++)
     {

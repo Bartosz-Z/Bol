@@ -1,10 +1,10 @@
 #include "nnbolai.h"
-#include "constants.h"
 #include <QRandomGenerator>
 
 NNBolAI::NNBolAI(qreal max_thrust, qreal max_torque, qreal (*activation_function)(qreal))
     : max_torque(max_torque), max_thrust(max_thrust), activation_function(activation_function)
 {
+    inputs[0] = std::make_shared<const qreal>(1);
     for (quint32 i = 0; i < INPUTS; i++)
         for (quint32 j = 0; j < HIDDEN; j++)
             weights_ih[i][j] = 2 * QRandomGenerator::global()->generateDouble() - 1;

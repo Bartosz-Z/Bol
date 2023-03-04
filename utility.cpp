@@ -1,5 +1,5 @@
 #include "utility.h"
-#include "qmath.h"
+#include <QtMath>
 
 qreal sqrDistance(const QPointF& a, const QPointF& b)
 {

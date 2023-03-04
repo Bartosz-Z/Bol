@@ -9,6 +9,7 @@
 #include <QRandomGenerator>
 
 #define BOL_SIZE 10
+#define BOL_MAX_THRUST 35
 
 int main(int argc, char *argv[])
 {
@@ -18,14 +19,13 @@ int main(int argc, char *argv[])
 
     NNLearner learner = NNLearner(
                 FRAMES_DELTA_TIME,
-                400 * FRAMES_PER_SECOND,
-                50,
-                200,
+                100,
                 BOL_SIZE,
-                20,
-                M_PI_2);
+                BOL_MAX_THRUST,
+                M_PI,
+                &sigmoid);
     learner.setBounds(windowRect);
-    learner.train();
+    learner.train(100, 400 * FRAMES_PER_SECOND);
 
     auto ai = learner.getBestNN();
     auto bol = std::make_shared<Bol>(
@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
 
     game_engine.setBounds(windowRect);
     w.setGameEngine(&game_engine);
+    w.linkBol(bol, BOL_MAX_THRUST);
 
     w.show();
     return a.exec();
